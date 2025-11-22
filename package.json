@@ -1,0 +1,27 @@
+{
+  "name": "wad-x-hw3",
+  "version": "1.0.0",
+  "description": "example pass: Pass_word1",
+  "main": "index.js",
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VictoriaGrau/WAD-X-HW3.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/VictoriaGrau/WAD-X-HW3/issues"
+  },
+  "homepage": "https://github.com/VictoriaGrau/WAD-X-HW3#readme",
+  "dependencies": {
+    "@vue/cli-service": "^5.0.9",
+    "vue": "^2.7.16",
+    "vue-router": "^3.6.5",
+    "vuex": "^3.6.2"
+  }
+}
