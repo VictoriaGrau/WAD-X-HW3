@@ -10,87 +10,90 @@
 
     <p class="content-text">{{ post.content }}</p>
 
-    <img 
-      v-if="post.image" 
-      :src="post.image" 
-      class="post-image" 
-    />
+    <img v-if="post.image" :src="post.image" class="post-image" />
 
-    <button class="like-button" @click="likePost(post.id)">
-      ❤️ {{ post.likes }}
-    </button>
+    <div class="like-section">
+      <button class="like-button" @click="incrementLike(post.id)">
+        ❤️ {{ post.likes }}
+      </button>
+    </div>
   </div>
 </template>
 
 <script>
-import { mapActions } from "vuex"
+import { mapActions } from "vuex";
 
 export default {
   name: "Post",
   props: ["post"],
   methods: {
-    ...mapActions(["likePost"])
+    ...mapActions(["incrementLike"])
   }
-}
+};
 </script>
 
 <style scoped>
 .post-card {
   background-color: #636CCB;
-  margin: 1rem 0;
-  padding: 1.5rem;
-  border-radius: 20px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+  padding: 0.75rem;
+  margin-bottom: 0.75rem;
+  border-radius: 10px;
   color: white;
+  font-size: 0.9rem;
+  box-sizing: border-box;
 }
 
 .post-header {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .avatar {
-  width: 45px;
-  height: 45px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
-  background: white;
+  margin-right: 0.5rem;
 }
 
 .author {
   margin: 0;
-  font-weight: 600;
+  font-size: 0.95rem;
 }
 
 .date {
   margin: 0;
-  font-size: 0.85rem;
-  opacity: 0.8;
-}
-
-.content-text {
-  margin: 1rem 0;
-  font-size: 1.1rem;
+  font-size: 0.75rem;
+  color: #e0e0e0;
 }
 
 .post-image {
   width: 100%;
-  border-radius: 12px;
+  border-radius: 8px;
+  margin-top: 0.5rem;
+}
+
+.content-text {
   margin: 0.5rem 0;
+  font-size: 0.85rem;
 }
 
 .like-section {
   text-align: right;
+  margin-top: 0.5rem;
 }
 
 .like-button {
   border: none;
   background: #2d3560;
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
+  padding: 0.3rem 0.8rem;
+  border-radius: 16px;
   color: white;
   cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.2s;
 }
+
 .like-button:hover {
   background: #1f2545;
 }

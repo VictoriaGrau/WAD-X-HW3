@@ -5,11 +5,13 @@
     <main class="main-content">
       <div class="posts-container">
 
-        <div class="spacer"></div>
-
         <Post v-for="p in posts" :key="p.id" :post="p" />
 
-        <div class="spacer"></div>
+        <div class="reset-container">
+            <button class="reset-button" @click="resetLikes">
+              Reset Likes
+            </button>
+        </div>
 
       </div>
     </main>
@@ -22,7 +24,7 @@
 import Header from "../components/Header.vue"
 import Footer from "../components/Footer.vue"
 import Post from "../components/Post.vue"
-import { mapState } from "vuex"
+import { mapState, mapActions } from "vuex";
 
 export default {
   name: "MainPage",
@@ -30,10 +32,13 @@ export default {
 
   computed: {
     ...mapState(["posts"])
+  },
+
+  methods: {
+    ...mapActions(["resetLikes"])
   }
 }
 </script>
-
 
 <style scoped>
 .page-container {
@@ -75,4 +80,26 @@ export default {
 .spacer {
   height: 20px;
 }
+
+.reset-container {
+  display: flex;
+  justify-content: center;
+  margin: 1.5rem 0;
+}
+
+.reset-button {
+  padding: 0.75rem 2rem;
+  background-color: #c53030;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.reset-button:hover {
+  background-color: #9b2c2c;
+}
+
 </style>
