@@ -5,8 +5,22 @@
         <img src="../assets/headerIMG.jpeg" alt="Logo" class="logo-img" />
       </div>
       <div class="nav-links">
-        <router-link to="/" class="nav-link">Main Page</router-link>
-        <router-link to="/signup" class="nav-link">Sign Up</router-link>
+        <router-link 
+          to="/" 
+          class="nav-link" 
+          exact
+          active-class="active-link"
+        >
+          Main Page
+        </router-link>
+        <router-link 
+          to="/signup" 
+          class="nav-link"
+          exact
+          active-class="active-link"
+        >
+          Sign Up
+        </router-link>
       </div>
     </nav>
   </header>
@@ -56,7 +70,7 @@ export default {
   text-decoration: none;
   padding: 0.5rem 1rem;
   border-radius: 30px;
-  background-color: #3C467B;
+  background-color: #3C467B;  
   transition: background-color 0.3s;
 }
 
@@ -64,8 +78,10 @@ export default {
   background-color: #50589C;
 }
 
-.nav-link.router-link-active {
-  background-color: #50589C;
+.active-link {
+  background-color: #272e51;  
   font-weight: 600;
+  color: #fff;
 }
+
 </style>
