@@ -3,9 +3,12 @@
   "version": "1.0.0",
   "description": "example pass: Pass_word1",
   "main": "index.js",
+  "homepage": "https://VictoriaGrau.github.io/WAD-X-HW3",
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build"
+    "build": "vue-cli-service build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "repository": {
     "type": "git",
@@ -17,11 +20,13 @@
   "bugs": {
     "url": "https://github.com/VictoriaGrau/WAD-X-HW3/issues"
   },
-  "homepage": "https://github.com/VictoriaGrau/WAD-X-HW3#readme",
   "dependencies": {
     "@vue/cli-service": "^5.0.9",
     "vue": "^2.7.16",
     "vue-router": "^3.6.5",
     "vuex": "^3.6.2"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.3.0"
   }
 }
