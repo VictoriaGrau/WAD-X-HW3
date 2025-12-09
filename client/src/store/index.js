@@ -41,7 +41,6 @@ export default new Vuex.Store({
         console.error("Error fetching posts:", err);
       }
     },
-    // For some reason the like counter is not synced with the currently displayed like counter.
     async likePost({ commit, state }, postId) {
       const id = Number(postId);
       const post = state.posts.find(p => p.id === id);

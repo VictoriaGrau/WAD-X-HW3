@@ -2,7 +2,7 @@
   <header class="header">
     <nav class="nav-container">
       <div class="logo">
-        <img src="assets\headerIMG.jpeg" alt="Logo" class="logo-img" />
+        <img src="assets/headerIMG.jpeg" alt="Logo" class="logo-img" />
       </div>
       <div class="nav-links">
         <router-link to="/" class="nav-link" exact active-class="active-link">
