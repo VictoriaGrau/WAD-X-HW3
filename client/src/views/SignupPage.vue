@@ -1,35 +1,21 @@
 <template>
   <div class="page-container">
     <Header />
-    
+
     <main class="main-content">
       <div class="signup-panel">
         <div class="form-container">
           <!-- Email Field -->
           <div class="form-group-horizontal">
             <label for="email" class="form-label">Email</label>
-            <input
-              type="email"
-              id="email"
-              v-model="email"
-              class="form-input"
-              placeholder="Enter your email"
-              required
-            />
+            <input type="email" id="email" v-model="email" class="form-input" placeholder="Enter your email" required />
           </div>
 
           <!-- Password Field -->
           <div class="form-group-horizontal">
             <label for="password" class="form-label">Password</label>
-            <input
-              type="password"
-              id="password"
-              v-model="password"
-              @input="validatePassword"
-              class="form-input"
-              placeholder="Enter your password"
-              required
-            />
+            <input type="password" id="password" v-model="password" @input="validatePassword" class="form-input"
+              placeholder="Enter your password" required />
           </div>
 
           <!-- Errors -->
@@ -44,12 +30,8 @@
 
           <!-- Signup Button -->
           <div class="button-container">
-            <button
-              @click="handleSignup"
-              :disabled="!isFormValid"
-              class="signup-button"
-              :class="{ 'disabled': !isFormValid }"
-            >
+            <button @click="handleSignup" :disabled="!isFormValid" class="signup-button"
+              :class="{ 'disabled': !isFormValid }">
               Sign Up
             </button>
           </div>
@@ -62,9 +44,9 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
 import Header from '../components/Header.vue'
 import Footer from '../components/Footer.vue'
+import { signup } from '../services/api'
 
 export default {
   name: 'SignupPage',
@@ -85,8 +67,6 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['signup']),
-    
     validatePassword() {
       const errors = []
       const pwd = this.password
@@ -124,23 +104,27 @@ export default {
       
       this.validationErrors = errors
     },
-    
-    handleSignup() {
-      if (this.isFormValid) {
-        this.signup({
-          email: this.email,
-          password: this.password
-        }).then(() => {
-          alert('Signup successful!')
-          this.email = ''
-          this.password = ''
-          this.validationErrors = []
-        })
+
+    async handleSignup() {
+      if (!this.isFormValid) return
+
+      try {
+        const res = await signup(this.email, this.password)
+        alert(res.message || 'Signup successful!')
+
+        this.email = ''
+        this.password = ''
+        this.validationErrors = ''
+
+        this.$router.push('/login')
+      } catch (err) {
+        alert(err.response?.data?.error || 'Signup failed')
       }
     }
   }
 }
 </script>
+
 
 <style scoped>
 .page-container {
@@ -161,7 +145,7 @@ export default {
 .signup-panel {
   background-color: #636CCB;
   border-radius: 20px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: 2rem;
   width: 100%;
   max-width: 500px;

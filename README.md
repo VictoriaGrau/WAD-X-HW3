@@ -1,14 +1,8 @@
-# WAD-X-HW3
+# WAD Homework 4
 
-Example pass: Pass_word1
+## Running the Application
 
-## Install dependencies
-
-# Node dependencies
-
-npm install
-
-# Install PostgreSQL
+### Install PostgreSQL
 
 https://www.enterprisedb.com/downloads/postgres-postgresql-downloads
 
@@ -19,6 +13,28 @@ Log into Postgre
 Create -> Database
 Name it wad_app
 
-## Run
+#### Database Setup (macOS)
 
+Have homebrew installed
+
+```bash
+brew install postgresql
+createuser -s postgres
+createdb wad_app
+```
+
+### Server
+```bash
+cd server
+npm install
+npm start
+```
+Server runs on http://localhost:3000
+
+### Client
+```bash
+cd client
+npm installs
 npm run serve
+```
+Client runs on http://localhost:8080

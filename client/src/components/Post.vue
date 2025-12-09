@@ -1,7 +1,7 @@
 <template>
-  <div class="post-card">
+  <div class="post-card" v-if="post">
     <div class="post-header">
-      <img :src="post.authorAvatar" class="avatar" />
+      <img :src="post.author_avatar" class="avatar" />
       <div>
         <h3 class="author">{{ post.author }}</h3>
         <p class="date">{{ post.date }}</p>
@@ -13,23 +13,27 @@
     <img v-if="post.image" :src="post.image" class="post-image" />
 
     <div class="like-section">
-      <button class="like-button" @click="incrementLike(post.id)">
-        ❤️ {{ post.likes }}
+      <button class="like-button" @click="handleLike">
+        ❤️ {{ displayedLikes }}
       </button>
     </div>
   </div>
 </template>
 
 <script>
-import { mapActions } from "vuex";
-
 export default {
-  name: "Post",
   props: ["post"],
+  computed: {
+    displayedLikes() {
+      return this.post.likes || 0;
+    }
+  },
   methods: {
-    ...mapActions(["incrementLike"])
+    handleLike() {
+      this.$store.dispatch('likePost', this.post.id);
+    }
   }
-};
+}
 </script>
 
 <style scoped>
