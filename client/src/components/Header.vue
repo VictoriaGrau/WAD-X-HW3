@@ -5,6 +5,14 @@
         <img src="assets/headerIMG.jpeg" alt="Logo" class="logo-img" />
       </div>
       <div class="nav-links">
+        <router-link 
+          to="/contact"
+          class="nav-link"
+          exact
+          active-class="active-link"
+        >
+          Contact Us
+        </router-link>
         <router-link to="/" class="nav-link" exact active-class="active-link">
           Main Page
         </router-link>

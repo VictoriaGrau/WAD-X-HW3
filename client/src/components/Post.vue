@@ -1,5 +1,10 @@
 <template>
-  <div class="post-card" v-if="post">
+  <div
+    class="post-card"
+    v-if="post"
+    @click="goToPostDetails"
+    style="cursor: pointer;"
+  >
     <div class="post-header">
       <img :src="post.author_avatar" class="avatar" />
       <div>
@@ -29,8 +34,14 @@ export default {
     }
   },
   methods: {
-    handleLike() {
+    handleLike(event) { // Stop click from reaching parent div
+      event.stopPropagation();
+
       this.$store.dispatch('likePost', this.post.id);
+    },
+
+    goToPostDetails() {
+      this.$router.push(`/post/${this.post.id}`);
     }
   }
 }

@@ -5,6 +5,15 @@
     <main class="main-content">
       <div class="posts-container">
 
+        <div class="action-buttons">
+          <button @click="goToAddPost" class="add-post-btn">
+            Add New Post
+          </button>
+          <button @click="logout" class="logout-btn">
+            Logout
+          </button>
+        </div>
+
         <Post v-for="p in posts" :key="p.id" :post="p" />
 
         <div class="reset-container">
@@ -61,6 +70,15 @@ export default {
       } finally {
         this.isClearing = false
       }
+    },
+    goToAddPost() {
+    this.$router.push('/add-post')
+    },
+    
+    logout() {
+      localStorage.removeItem('token')
+      
+      this.$router.push('/login')
     }
   },
 
@@ -109,5 +127,43 @@ export default {
 
 .reset-button:hover {
   background-color: #9b2c2c;
+}
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.add-post-btn {
+  background-color: #2d3560;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.add-post-btn:hover {
+  background-color: #1f2545;
+  transform: translateY(-2px);
+}
+
+.logout-btn {
+  background-color: #c53030;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.logout-btn:hover {
+  background-color: #9b2c2c;
+  transform: translateY(-2px);
 }
 </style>

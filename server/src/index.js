@@ -47,7 +47,10 @@ app.post('/signup', async (req, res) => {
         const token = jwt.sign({ email }, JWT_SECRET, { expiresIn: "1h" });
 
         res.cookie("token", token, { httpOnly: true });
-        res.json({ message: "Signup successful" });
+        res.json({ 
+            message: "Signup successful",
+            token: token
+        });
 
     } catch (err) {
         console.log(err);
@@ -76,7 +79,10 @@ app.post('/login', async (req, res) => {
         const token = jwt.sign({ email }, JWT_SECRET, { expiresIn: "1h" });
 
         res.cookie("token", token, { httpOnly: true });
-        res.json({ message: "Login successful" });
+        res.json({ 
+            message: "Login successful",
+            token: token
+        });
 
     } catch (err) {
         console.log(err);
@@ -96,16 +102,26 @@ app.get('/posts', authenticateToken, async (req, res) => {
 
 // Post a post
 app.post('/posts', authenticateToken, async (req, res) => {
-    const { content } = req.body;
+    const { content, image } = req.body;
+    
+    try {
+        // placeholder
+        const author = req.user.email.split('@')[0];
+        const author_email = req.user.email;
+        const author_avatar = "/assets/avatar-default.svg";
+        
+        await pool.query(
+            `INSERT INTO posts (author, author_email, author_avatar, content, image, likes) 
+             VALUES ($1, $2, $3, $4, $5, $6)`,
+            [author, author_email, author_avatar, content, image || null, 0]
+        );
 
-    await pool.query(
-        `INSERT INTO posts (author, author_email, author_avatar, content, image, likes) VALUES ($1, $2, $3, $4, $5, $6)`,
-        [author, author_email, author_avatar, content, image, likes]
-    );
-
-    res.json({ message: "Post added" });
+        res.json({ message: "Post added" });
+    } catch (err) {
+        console.error("Add post error:", err);
+        res.status(500).json({ error: "Failed to add post" });
+    }
 });
-
 app.put('/posts/:id', authenticateToken, async (req, res) => {
     const { content } = req.body;
     const { id } = req.params;
